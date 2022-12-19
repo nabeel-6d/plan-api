@@ -2,6 +2,7 @@ package com.example.plan_module.planapi_main;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ public class Plan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private int plan_id;//{primary key} auto generated so no setter / in-param cnstr
     private String name;
     private Date validity;
