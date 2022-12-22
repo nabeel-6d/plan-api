@@ -1,4 +1,4 @@
-package com.example.plan_module.planapi_main;
+package com.example.plan_module.Models;
 
 import java.util.Date;
 

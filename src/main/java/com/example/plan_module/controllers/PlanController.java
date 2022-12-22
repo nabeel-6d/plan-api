@@ -1,7 +1,6 @@
-package com.example.plan_module.planapi_main;
+package com.example.plan_module.controllers;
 
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.plan_module.Models.Plan;
+import com.example.plan_module.Services.PlanService;
 
 @RestController
 @RequestMapping("plans")

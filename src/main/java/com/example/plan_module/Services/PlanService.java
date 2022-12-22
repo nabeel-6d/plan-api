@@ -1,10 +1,13 @@
-package com.example.plan_module.planapi_main;
+package com.example.plan_module.Services;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.plan_module.Models.Plan;
+import com.example.plan_module.Repository.PlanRepository;
 
 @Service
 public class PlanService {
