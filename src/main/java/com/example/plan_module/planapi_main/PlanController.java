@@ -1,4 +1,4 @@
-package com.example.plan_module.controllers;
+package com.example.plan_module.planapi_main;
 
 import java.util.List;
 
@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.plan_module.Models.Plan;
-import com.example.plan_module.Services.PlanService;
 
 @RestController
 @RequestMapping("plans")

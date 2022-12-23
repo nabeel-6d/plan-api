@@ -1,8 +1,6 @@
-package com.example.plan_module.Repository;
+package com.example.plan_module.planapi_main;
 
 import org.springframework.data.repository.CrudRepository;
-
-import com.example.plan_module.Models.Plan;
 
 public interface PlanRepository extends CrudRepository<Plan,Integer>{
     
