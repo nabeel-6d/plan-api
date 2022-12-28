@@ -3,7 +3,7 @@ package com.example.plan_module.planapi_main;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,38 +49,41 @@ public class PlanController {
 
     @GetMapping("/giveplans/byvalidity/{validity}")
     public Collection<Plan> allPlansByValidity(@PathVariable String validity){
-        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
-        Date date=null;
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date sqlFormattedDate=null;
         try {
-            date = sdf.parse(validity);
+            java.util.Date date=sdf.parse(validity);
+            sqlFormattedDate=new Date(date.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return service.retrievePlansByValidity(date);
+        return service.retrievePlansByValidity(sqlFormattedDate);
     }
 
     @GetMapping("/giveplans/bydatecreated/{createdate}")
     public Collection<Plan> allPlansByCreationDate(@PathVariable String createdate){
-        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
-        Date date=null;
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date sqlFormattedDate=null;
         try {
-            date = sdf.parse(createdate);
+            java.util.Date date=sdf.parse(createdate);
+            sqlFormattedDate=new Date(date.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return service.retrievePlansByCreationDate(date);
+        return service.retrievePlansByCreationDate(sqlFormattedDate);
     }
 
     @GetMapping("/giveplans/bydatemodified/{modifieddate}")
     public Collection<Plan> allPlansByUpdationDate(@PathVariable String modifieddate){
-        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
-        Date date=null;
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date sqlFormattedDate=null;
         try {
-            date = sdf.parse(modifieddate);
+            java.util.Date date=sdf.parse(modifieddate);
+            sqlFormattedDate=new Date(date.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return service.retrievePlansByUpdationDate(date);
+        return service.retrievePlansByUpdationDate(sqlFormattedDate);
     }
 
 }

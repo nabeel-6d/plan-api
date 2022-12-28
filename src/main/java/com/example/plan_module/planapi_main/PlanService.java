@@ -1,7 +1,7 @@
 package com.example.plan_module.planapi_main;
 
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

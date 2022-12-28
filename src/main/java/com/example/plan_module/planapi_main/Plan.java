@@ -1,6 +1,7 @@
 package com.example.plan_module.planapi_main;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,19 +21,22 @@ public class Plan {
     private Date creationDate;
     private Date updationDate;
     
+    {
+        if(creationDate == null)
+            creationDate = new Date(System.currentTimeMillis());    
+    }
+
     public Plan() {
         System.out.println("in plan no-arg cnstr");
-        this.creationDate=new Date();
     }
     
     public Plan(String name, Date validity) {
         if(name == null || name.isEmpty() || name.isBlank())
             throw new IllegalArgumentException("plan name is either null or empty or blank------->");
-        if(validity==null || validity.before(new Date()))
+        if(validity==null )
             throw new IllegalArgumentException("plan validity is null or improper pls give a future date------->");
         this.name = name;
         this.validity = validity;
-        this.creationDate=new Date();
         System.out.println("in plan param cnstr");
     }
 
@@ -47,7 +51,7 @@ public class Plan {
     }
     public void setName(String name) {
         this.name = name;
-        this.updationDate=new Date();
+        this.updationDate=new Date(System.currentTimeMillis());
         System.out.println("in plan name setter");
     }
     public Date getValidity() {
@@ -56,18 +60,16 @@ public class Plan {
     }
     public void setValidity(Date validity) {
         System.out.println("in plan validity setter");
-        // SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
-        // validity=sdf.format(validity)
-        if(validity==null || validity.before(new Date()))
+        if(validity==null ) 
             throw new IllegalArgumentException("plan validity is null or improper pls give a future date------->");
     
         this.validity = validity;
-        this.updationDate=new Date();
+        this.updationDate=new Date(System.currentTimeMillis());;
     }
 
     public void setPlan_id(int plan_id) {
         this.plan_id = plan_id;
-        this.updationDate=new Date();
+        this.updationDate=new Date(System.currentTimeMillis());
     }
 
     public Date getCreationDate() {
@@ -131,6 +133,5 @@ public class Plan {
     }
     
 
-    
     
 }
