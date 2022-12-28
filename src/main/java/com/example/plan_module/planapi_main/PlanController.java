@@ -1,6 +1,9 @@
 package com.example.plan_module.planapi_main;
 
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +38,7 @@ public class PlanController {
     }
 
     @GetMapping("/giveplans")
-    public List<Plan> retrieve(){
+    public Collection<Plan> retrieve(){
        return service.retrieveAllPlans();
     }
 
@@ -43,4 +46,41 @@ public class PlanController {
     public Plan retrieveOne(@PathVariable int plan_id){
         return service.retrieveOnePlan(plan_id);
     }
+
+    @GetMapping("/giveplans/byvalidity/{validity}")
+    public Collection<Plan> allPlansByValidity(@PathVariable String validity){
+        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+        Date date=null;
+        try {
+            date = sdf.parse(validity);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return service.retrievePlansByValidity(date);
+    }
+
+    @GetMapping("/giveplans/bydatecreated/{createdate}")
+    public Collection<Plan> allPlansByCreationDate(@PathVariable String createdate){
+        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+        Date date=null;
+        try {
+            date = sdf.parse(createdate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return service.retrievePlansByCreationDate(date);
+    }
+
+    @GetMapping("/giveplans/bydatemodified/{modifieddate}")
+    public Collection<Plan> allPlansByUpdationDate(@PathVariable String modifieddate){
+        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+        Date date=null;
+        try {
+            date = sdf.parse(modifieddate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return service.retrievePlansByUpdationDate(date);
+    }
+
 }

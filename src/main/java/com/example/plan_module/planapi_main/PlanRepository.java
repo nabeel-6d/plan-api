@@ -1,7 +1,13 @@
 package com.example.plan_module.planapi_main;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Date;
+import java.util.List;
 
-public interface PlanRepository extends CrudRepository<Plan,Integer>{
-    
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface PlanRepository extends PagingAndSortingRepository<Plan,Integer>{
+    List<Plan> findByValidity(Date validity,Pageable pageable);
+    List<Plan> findByCreationDate(Date creationDate,Pageable pageable);
+    List<Plan> findByUpdationDate(Date updationDate,Pageable pageable);
 }

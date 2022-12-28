@@ -1,9 +1,12 @@
 package com.example.plan_module.planapi_main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -53,14 +56,28 @@ public class PlanService {
         }
     }
 
-    public List<Plan> retrieveAllPlans(){
-        List<Plan> recievedData=new ArrayList<Plan>();
-        planrepo.findAll().forEach(recievedData::add);
-
-        return recievedData;
+    public Collection<Plan> retrieveAllPlans(){
+        Pageable allPagedData=PageRequest.of(0, 10);
+        return planrepo.findAll(allPagedData).getContent();
     }
 
     public Plan retrieveOnePlan(int id){
         return planrepo.findById(id).get();
     }
+
+    public Collection<Plan> retrievePlansByValidity(Date validity){
+        Pageable allPagedPlansByValidity=PageRequest.of(0, 10, Sort.by("validity").ascending());
+        return planrepo.findByValidity(validity,allPagedPlansByValidity);
+    }
+
+    public Collection<Plan> retrievePlansByCreationDate(Date createDate){
+        Pageable retrievePlansByCreationDate=PageRequest.of(0, 10, Sort.by("creationDate").ascending());
+        return planrepo.findByCreationDate(createDate,retrievePlansByCreationDate);
+    }
+
+    public Collection<Plan> retrievePlansByUpdationDate(Date updateDate){
+        Pageable retrievePlansByUpdationDate=PageRequest.of(0, 10, Sort.by("updationDate").ascending());
+        return planrepo.findByUpdationDate(updateDate,retrievePlansByUpdationDate);      
+    }
+    
 }

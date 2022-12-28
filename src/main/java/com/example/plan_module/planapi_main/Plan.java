@@ -17,10 +17,12 @@ public class Plan {
     private int plan_id;//{primary key} auto generated so no setter / in-param cnstr
     private String name;
     private Date validity;
-
+    private Date creationDate;
+    private Date updationDate;
     
     public Plan() {
         System.out.println("in plan no-arg cnstr");
+        this.creationDate=new Date();
     }
     
     public Plan(String name, Date validity) {
@@ -30,6 +32,7 @@ public class Plan {
             throw new IllegalArgumentException("plan validity is null or improper pls give a future date------->");
         this.name = name;
         this.validity = validity;
+        this.creationDate=new Date();
         System.out.println("in plan param cnstr");
     }
 
@@ -44,6 +47,7 @@ public class Plan {
     }
     public void setName(String name) {
         this.name = name;
+        this.updationDate=new Date();
         System.out.println("in plan name setter");
     }
     public Date getValidity() {
@@ -54,7 +58,24 @@ public class Plan {
         System.out.println("in plan validity setter");
         // SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
         // validity=sdf.format(validity)
+        if(validity==null || validity.before(new Date()))
+            throw new IllegalArgumentException("plan validity is null or improper pls give a future date------->");
+    
         this.validity = validity;
+        this.updationDate=new Date();
+    }
+
+    public void setPlan_id(int plan_id) {
+        this.plan_id = plan_id;
+        this.updationDate=new Date();
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public Date getUpdationDate() {
+        return updationDate;
     }
 
     @Override
@@ -64,10 +85,11 @@ public class Plan {
         result = prime * result + plan_id;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((validity == null) ? 0 : validity.hashCode());
+        result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
+        result = prime * result + ((updationDate == null) ? 0 : updationDate.hashCode());
         return result;
     }
 
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -89,17 +111,26 @@ public class Plan {
                 return false;
         } else if (!validity.equals(other.validity))
             return false;
+        if (creationDate == null) {
+            if (other.creationDate != null)
+                return false;
+        } else if (!creationDate.equals(other.creationDate))
+            return false;
+        if (updationDate == null) {
+            if (other.updationDate != null)
+                return false;
+        } else if (!updationDate.equals(other.updationDate))
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Plan [plan_id=" + plan_id + ", name=" + name + ", validity=" + validity + "]";
+        return "Plan [plan_id=" + plan_id + ", name=" + name + ", validity=" + validity + ", creationDate="
+                + creationDate + ", updationDate=" + updationDate + "]";
     }
+    
 
-    public void setPlan_id(int plan_id) {
-        this.plan_id = plan_id;
-    }
     
     
 }
