@@ -62,8 +62,8 @@ public class PlanController {
 
     @GetMapping("/giveplans/bydatecreated/{createdate}")
     public Collection<Plan> allPlansByCreationDate(@PathVariable String createdate){
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        java.sql.Date sqlFormattedDate=null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        java.sql.Date sqlFormattedDate = null;
         try {
             java.util.Date date=sdf.parse(createdate);
             sqlFormattedDate=new Date(date.getTime());
@@ -84,6 +84,36 @@ public class PlanController {
             e.printStackTrace();
         }
         return service.retrievePlansByUpdationDate(sqlFormattedDate);
+    }
+
+    @GetMapping("giveplans/yearcreated/{year}")
+    public Collection<Plan> allPlansByCreationYear(@PathVariable int year){
+        return service.retrievePlansByCreationYear(year);
+    }
+    
+    @GetMapping("giveplans/monthcreated/{month}")
+    public Collection<Plan> allPlansByCreationMonth(@PathVariable int month){
+        return service.retrievePlansByCreationMonth(month);
+    }
+
+    
+    @GetMapping("giveplans/yearupdated/{year}")
+    public Collection<Plan> allPlansByUpdationYear(@PathVariable int year){
+        return service.retrievePlansByUpdationYear(year);
+    }
+    
+    @GetMapping("giveplans/monthupdated/{month}")
+    public Collection<Plan> allPlansByUpdationMonth(@PathVariable int month){
+        return service.retrievePlansByUpdationMonth(month);
+    }
+    
+    @GetMapping("giveplans/validityinyear/{year}")
+    public Collection<Plan> allPlansByValidityYear(@PathVariable int year){
+        return service.retrievePlansByValidityYear(year);
+    }
+    @GetMapping("giveplans/validityinmonth/{month}")
+    public Collection<Plan> allPlansByValidityMonth(@PathVariable int month){
+        return service.retrievePlansByValidityMonth(month);
     }
 
 }

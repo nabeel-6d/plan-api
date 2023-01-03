@@ -1,7 +1,9 @@
 package com.example.plan_module.planapi_main;
 
-import java.util.Collection;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -71,13 +73,42 @@ public class PlanService {
     }
 
     public Collection<Plan> retrievePlansByCreationDate(Date createDate){
-        Pageable retrievePlansByCreationDate=PageRequest.of(0, 10, Sort.by("creationDate").ascending());
-        return planrepo.findByCreationDate(createDate,retrievePlansByCreationDate);
+        Pageable pagedPlansByCreationDate=PageRequest.of(0, 10, Sort.by("creationDate").ascending());
+        return planrepo.findByCreationDate(createDate,pagedPlansByCreationDate);
     }
 
     public Collection<Plan> retrievePlansByUpdationDate(Date updateDate){
-        Pageable retrievePlansByUpdationDate=PageRequest.of(0, 10, Sort.by("updationDate").ascending());
-        return planrepo.findByUpdationDate(updateDate,retrievePlansByUpdationDate);      
+        Pageable pagedPlansByUpdationDate=PageRequest.of(0, 10, Sort.by("updationDate").ascending());
+        return planrepo.findByUpdationDate(updateDate,pagedPlansByUpdationDate);      
     }
     
+    public Collection<Plan> retrievePlansByCreationYear(int createDate){
+        Pageable pagedPlansByCreatedDate=PageRequest.of(0, 10);
+        return planrepo.findByCreationYear(createDate, pagedPlansByCreatedDate);
+    }
+
+    public Collection<Plan> retrievePlansByUpdationYear(int updateYear){
+        Pageable pagedPlansByUpdationDate=PageRequest.of(0, 10);
+        return planrepo.findByUpdationYear(updateYear, pagedPlansByUpdationDate);
+    }
+
+    public Collection<Plan> retrievePlansByValidityYear(int validity){
+        Pageable pagedPlansByValidityDate=PageRequest.of(0, 10);
+        return planrepo.findByValidityYear(validity, pagedPlansByValidityDate);
+    }
+
+    public Collection<Plan> retrievePlansByCreationMonth(int createDate){
+        Pageable pagedPlansByCreatedDate=PageRequest.of(0, 10);
+        return planrepo.findByCreationMonth(createDate, pagedPlansByCreatedDate);
+    }
+
+    public Collection<Plan> retrievePlansByUpdationMonth(int updateMonth){
+        Pageable pagedPlansByUpdationDate=PageRequest.of(0, 10);
+        return planrepo.findByUpdationMonth(updateMonth, pagedPlansByUpdationDate);
+    }
+
+    public Collection<Plan> retrievePlansByValidityMonth(int validity){
+        Pageable pagedPlansByValidityDate=PageRequest.of(0, 10);
+        return planrepo.findByValidityMonth(validity, pagedPlansByValidityDate);
+    }
 }
